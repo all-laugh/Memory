@@ -12,23 +12,14 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var emojiMemorizeGame: EmojiMemoryGame
 
     var body: some View {
-        let fiveOrMore = emojiMemorizeGame.cards.count >= 5
         return HStack {
             ForEach(emojiMemorizeGame.cards) { card in
-                if fiveOrMore {
-                    CardView(card: card).onTapGesture {
-                        emojiMemorizeGame.choose(card: card)
-                    }.font(Font.title)
-                }
-                else {
                     CardView(card: card).onTapGesture {
                         emojiMemorizeGame.choose(card: card)
                     }
-                }
-                
             }
         }
-        .foregroundColor(.orange)
+        .foregroundColor(.green)
         .font(Font.largeTitle)
         .padding()
         
@@ -40,17 +31,29 @@ struct CardView: View {
     var card: MemorizeGame<String>.Card
     
     var body: some View {
-        ZStack {
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
-                RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
-                Text(card.content).foregroundColor(.black)
-            } else {
-                RoundedRectangle(cornerRadius: 10.0).fill()
+        GeometryReader { geometry in
+            ZStack {
+                if card.isFaceUp {
+                    RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
+                    RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
+                    Text(card.content)
+                } else {
+                    RoundedRectangle(cornerRadius: 10.0).fill()
+                }
             }
+            .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
+            .font(Font.system(size: font(for: geometry.size)))
         }
-        .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
     }
+    
+    // MARK: - Drawing Constants
+    let cornerRadius: CGFloat = 10.0
+    let borderWidth: CGFloat = 3.0
+    func font(for size: CGSize) -> CGFloat {
+        min(size.width, size.height ) * 0.75
+    }
+    
+    
 }
 
 
