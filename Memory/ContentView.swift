@@ -10,13 +10,22 @@ import SwiftUI
 struct ContentView: View {
     
     var emojiMemorizeGame: EmojiMemoryGame
-    
+
     var body: some View {
+        let fiveOrMore = emojiMemorizeGame.cards.count >= 5
         HStack {
             ForEach(emojiMemorizeGame.cards) { card in
-                CardView(card: card).onTapGesture {
-                    emojiMemorizeGame.choose(card: card)
+                if fiveOrMore {
+                    CardView(card: card).onTapGesture {
+                        emojiMemorizeGame.choose(card: card)
+                    }.font(Font.title)
                 }
+                else {
+                    CardView(card: card).onTapGesture {
+                        emojiMemorizeGame.choose(card: card)
+                    }
+                }
+                
             }
         }
         .foregroundColor(.orange)
@@ -25,6 +34,7 @@ struct ContentView: View {
         
     }
 }
+
 
 struct CardView: View {
     var card: MemorizeGame<String>.Card
@@ -38,8 +48,8 @@ struct CardView: View {
             } else {
                 RoundedRectangle(cornerRadius: 10.0).fill()
             }
-            
         }
+        .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
     }
 }
 
