@@ -12,12 +12,11 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var emojiMemorizeGame: EmojiMemoryGame
 
     var body: some View {
-        return HStack {
-            ForEach(emojiMemorizeGame.cards) { card in
+        Grid(emojiMemorizeGame.cards) { card in
                     CardView(card: card).onTapGesture {
-                        emojiMemorizeGame.choose(card: card)
+                        emojiMemorizeGame.choose(card)
                     }
-            }
+                    .padding(2)
         }
         .foregroundColor(.green)
         .font(Font.largeTitle)
@@ -34,14 +33,14 @@ struct CardView: View {
         GeometryReader { geometry in
             ZStack {
                 if card.isFaceUp {
-                    RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
-                    RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
+                    RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
+                    RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: borderWidth)
                     Text(card.content)
                 } else {
-                    RoundedRectangle(cornerRadius: 10.0).fill()
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
                 }
             }
-            .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
+//            .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
             .font(Font.system(size: font(for: geometry.size)))
         }
     }
