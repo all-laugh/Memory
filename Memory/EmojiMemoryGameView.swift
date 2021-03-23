@@ -37,7 +37,9 @@ struct CardView: View {
                     RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: borderWidth)
                     Text(card.content)
                 } else {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                    if !card.isMatched {
+                        RoundedRectangle(cornerRadius: cornerRadius).fill()
+                    }
                 }
             }
 //            .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
