@@ -10,6 +10,8 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     
     @ObservedObject var emojiMemorizeGame: EmojiMemoryGame
+    var theme: Themes { emojiMemorizeGame.theme }
+    var themeColor: Color { ThemeColors(gameTheme: theme).cardColor }
 
     var body: some View {
         Grid(emojiMemorizeGame.cards) { card in
@@ -18,8 +20,8 @@ struct EmojiMemoryGameView: View {
                     }
                     .padding(2)
         }
-        .foregroundColor(.green)
-        .font(Font.largeTitle)
+        .foregroundColor(themeColor)
+//        .font(Font.largeTitle)
         .padding()
         
     }
@@ -44,6 +46,7 @@ struct CardView: View {
             }
 //            .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
             .font(Font.system(size: font(for: geometry.size)))
+            
         }
     }
     
