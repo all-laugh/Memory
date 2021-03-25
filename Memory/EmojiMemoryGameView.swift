@@ -14,6 +14,16 @@ struct EmojiMemoryGameView: View {
     var themeColor: Color { ThemeColors(gameTheme: theme).cardColor }
 
     var body: some View {
+        
+        VStack {
+            Text(theme.theme?.rawValue.uppercased() ?? "no theme")
+                .padding(.top, 10)
+                .foregroundColor(themeColor)
+                .font(.headline)
+            // TODO: implement score
+        }
+
+        
         Grid(emojiMemorizeGame.cards) { card in
                     CardView(card: card).onTapGesture {
                         emojiMemorizeGame.choose(card)
@@ -24,6 +34,12 @@ struct EmojiMemoryGameView: View {
 //        .font(Font.largeTitle)
         .padding()
         
+        Button("New Game") {
+            self.emojiMemorizeGame.resetModel()
+        }
+        .padding(.bottom, 10)
+        .foregroundColor(themeColor)
+        .font(.headline)
     }
 }
 

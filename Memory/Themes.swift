@@ -8,7 +8,7 @@
 import Foundation
 
 struct Themes {
-    enum themes: CaseIterable {
+    enum themes: String, CaseIterable {
         case nationalFlags, faces, symbols, popular, animals, foods
     }
     var emojis: Array<String>
