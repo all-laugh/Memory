@@ -12,15 +12,17 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var emojiMemorizeGame: EmojiMemoryGame
     var theme: Themes { emojiMemorizeGame.theme }
     var themeColor: Color { ThemeColors(gameTheme: theme).cardColor }
+    var score: Int { emojiMemorizeGame.score }
 
     var body: some View {
         
         VStack {
             Text(theme.theme?.rawValue.uppercased() ?? "no theme")
+                .fontWeight(.bold)
                 .padding(.top, 10)
                 .foregroundColor(themeColor)
                 .font(.headline)
-            // TODO: implement score
+            Text("Score: \(score)").font(.caption)
         }
 
         
@@ -37,7 +39,7 @@ struct EmojiMemoryGameView: View {
         Button("New Game") {
             self.emojiMemorizeGame.resetModel()
         }
-        .padding(.bottom, 10)
+        .padding(.bottom, 15)
         .foregroundColor(themeColor)
         .font(.headline)
     }
