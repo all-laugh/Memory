@@ -5,7 +5,6 @@
 //  Created by Xiao Quan on 3/24/21.
 //
 
-import Foundation
 import SwiftUI
 
 struct ThemeColors {
