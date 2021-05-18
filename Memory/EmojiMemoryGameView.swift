@@ -11,7 +11,7 @@ struct EmojiMemoryGameView: View {
     
     @ObservedObject var emojiMemorizeGame: EmojiMemoryGame
     var theme: Themes { emojiMemorizeGame.theme }
-    var themeColor: Color { ThemeColors(gameTheme: theme).cardColor }
+    var cardColor: Color { Color(theme.cardColor) }
     var score: Int { emojiMemorizeGame.score }
 
     var body: some View {
@@ -20,7 +20,7 @@ struct EmojiMemoryGameView: View {
             Text(theme.theme?.rawValue.uppercased() ?? "no theme")
                 .fontWeight(.bold)
                 .padding(.top, 10)
-                .foregroundColor(themeColor)
+                .foregroundColor(cardColor)
                 .font(.title)
             Text("Score: \(score)").font(.caption)
             
@@ -30,14 +30,14 @@ struct EmojiMemoryGameView: View {
                         }
                         .padding(2)
             }
-            .foregroundColor(themeColor)
+            .foregroundColor(cardColor)
             .padding(5)
             
             Button("New Game") {
                 self.emojiMemorizeGame.resetModel()
             }
             .padding(.bottom, 15)
-            .foregroundColor(themeColor)
+            .foregroundColor(cardColor)
             .font(.body)
         }
 

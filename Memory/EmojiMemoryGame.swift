@@ -5,7 +5,7 @@
 //  Created by Xiao Quan on 3/7/21.
 //
 
-import Foundation
+import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     
@@ -16,9 +16,10 @@ class EmojiMemoryGame: ObservableObject {
     
     private static func createMemorizeGame() -> MemorizeGame<String> {
         let theme = Themes()
+        print("json = \(String(data: theme.json!, encoding: .utf8) ?? "nil")")
         let emojis: Array<String> = theme.emojis
         
-        let numPairs = Int.random(in: 3...6)
+        let numPairs = theme.numberOfPairsOfCards
         
         return MemorizeGame<String> (numberOfPairsOfCards: numPairs, theme: theme) { pairIndex in
             return emojis[pairIndex % emojis.count]
