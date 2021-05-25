@@ -22,27 +22,27 @@ struct Themes: Codable {
         case .nationalFlags:
             emojis = ["🇨🇳", "🇺🇸", "🇨🇷", "🇦🇶", "🇦🇷", "🇧🇯", "🇧🇷"]
             numberOfPairsOfCards = 5
-            cardColor = UIColor.red.rgb
+            cardColor = UIColor.systemRed.rgb
         case .faces:
             emojis = ["😀", "😃","😄","😁", "😆", "😝"]
             numberOfPairsOfCards = 3
-            cardColor = UIColor.yellow.rgb
+            cardColor = UIColor.systemYellow.rgb
         case .symbols:
             emojis = ["🚼", "⚧", "⏯", "🚮", "💹", "⏯"]
             numberOfPairsOfCards = 4
-            cardColor = UIColor.blue.rgb
+            cardColor = UIColor.systemBlue.rgb
         case .popular:
             emojis = ["🈲", "💯", "🍻", "✌️", "🎉"]
             numberOfPairsOfCards = 4
-            cardColor = UIColor.purple.rgb
+            cardColor = UIColor.systemPurple.rgb
         case .animals:
             emojis = ["🐶", "🐺", "🐙", "🪰", "🐸", "🦁", "🐛"]
             numberOfPairsOfCards = 7
-            cardColor = UIColor.green.rgb
+            cardColor = UIColor.systemGreen.rgb
         case .foods:
             emojis = ["🥑", "🍓", "🧀", "🍖", "🥬", "🌶"]
             numberOfPairsOfCards = 5
-            cardColor = UIColor.orange.rgb
+            cardColor = UIColor.systemOrange.rgb
             
         case .none:
             emojis = ["📵"]
