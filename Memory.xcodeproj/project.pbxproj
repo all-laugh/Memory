@@ -43,6 +43,7 @@
 		11B115E325F6D1CD00EADBFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11B115EA25F6D27000EADBFE /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		11B115ED25F6D27900EADBFE /* MemorizeGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorizeGame.swift; sourceTree = "<group>"; };
+		500EAA21265D782E002A69FA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		50150C662654115200F94050 /* UIColor+RGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGBA.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +61,7 @@
 		11B115C925F6D1CC00EADBFE = {
 			isa = PBXGroup;
 			children = (
+				500EAA21265D782E002A69FA /* README.md */,
 				11B115D425F6D1CC00EADBFE /* Memory */,
 				11B115D325F6D1CC00EADBFE /* Products */,
 			);
