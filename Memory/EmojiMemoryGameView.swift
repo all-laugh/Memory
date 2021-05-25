@@ -9,37 +9,38 @@ import SwiftUI
 
 struct EmojiMemoryGameView: View {
     
-    @ObservedObject var emojiMemorizeGame: EmojiMemoryGame
-    var theme: Themes { emojiMemorizeGame.theme }
+    @ObservedObject var emojiMemoryGame: EmojiMemoryGame
+    var theme: Themes { emojiMemoryGame.theme }
     var cardColor: Color { Color(theme.cardColor) }
-    var score: Int { emojiMemorizeGame.score }
+    var score: Int { emojiMemoryGame.score }
 
     var body: some View {
-        
         VStack {
             Text(theme.theme?.rawValue.uppercased() ?? "no theme")
                 .fontWeight(.bold)
                 .padding(.top, 10)
-                .foregroundColor(cardColor)
                 .font(.title)
             Text("Score: \(score)").font(.caption)
             
-            Grid(emojiMemorizeGame.cards) { card in
-                        CardView(card: card).onTapGesture {
-                            emojiMemorizeGame.choose(card)
-                        }
-                        .padding(2)
+            Grid(emojiMemoryGame.cards) { card in
+                CardView(card: card).onTapGesture {
+                    withAnimation(.linear) {
+                        emojiMemoryGame.choose(card)
+                    }
+                }
+                    .padding(2)
             }
-            .foregroundColor(cardColor)
-            .padding(5)
+                .padding(5)
             
             Button("New Game") {
-                self.emojiMemorizeGame.resetModel()
+                withAnimation(.linear) {
+                    self.emojiMemoryGame.resetGame()
+                }
             }
-            .padding(.bottom, 15)
-            .foregroundColor(cardColor)
-            .font(.body)
+                .padding(.bottom, 15)
+                .font(.title)
         }
+        .foregroundColor(cardColor)
 
     }
 
@@ -53,19 +54,45 @@ struct EmojiMemoryGameView: View {
             }
         }
         
+        @State private var animatedBonusRemaining: Double = 0
+        
+        private func startBonusTimeAnimation() {
+            animatedBonusRemaining = card.bonusRemaining
+            withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+                animatedBonusRemaining = 0
+            }
+        }
+        
         @ViewBuilder
         func body (for size: CGSize) -> some View {
             if card.isFaceUp || !card.isMatched {
                 ZStack {
-                    CountdownPie(
-                        startAngle: Angle(degrees: 0-90),
-                        endAngle: Angle(degrees: 110-90)
-                    )
+                    Group {
+                        if card.isConsumingBonusTime {
+                            CountdownPie(
+                                startAngle: Angle(degrees: 0-90),
+                                endAngle: Angle(degrees: -animatedBonusRemaining * 360 - 90)
+                            )
+                            .onAppear {
+                                startBonusTimeAnimation()
+                            }
+                        } else {
+                            CountdownPie(
+                                startAngle: Angle(degrees: 0-90),
+                                endAngle: Angle(degrees: -card.bonusRemaining * 360 - 90)
+                            )
+                        }
+                    }
                     .padding(5)
                     .opacity(0.4)
+                    .transition(.scale)
+
                     Text(card.content)
+                        .rotationEffect(Angle.degrees(card.isMatched ? -360 : 0))
+                        .animation(card.isMatched ? .linear(duration: 1).repeatForever(autoreverses: false) : .default)
                 }
                 .cardify(isFaceUp: card.isFaceUp)
+                .transition(.scale)
                 .font(Font.system(size: font(for: size)))
             }
         }
@@ -80,7 +107,7 @@ struct EmojiMemoryGameView: View {
         static var previews: some View {
             let game = EmojiMemoryGame()
             game.choose(game.cards[0])
-            return EmojiMemoryGameView(emojiMemorizeGame: game)
+            return EmojiMemoryGameView(emojiMemoryGame: game)
         }
     }
 }

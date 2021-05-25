@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Themes: Codable {
     enum themes: String, CaseIterable, Codable {
-        case nationalFlags, faces, symbols, popular, animals, foods
+        case flags, faces, symbols, popular, animals, foods
     }
     var emojis: Array<String>
     var theme: themes?
@@ -19,7 +19,7 @@ struct Themes: Codable {
     init() {
         theme = themes.allCases.randomElement()
         switch theme {
-        case .nationalFlags:
+        case .flags:
             emojis = ["🇨🇳", "🇺🇸", "🇨🇷", "🇦🇶", "🇦🇷", "🇧🇯", "🇧🇷"]
             numberOfPairsOfCards = 5
             cardColor = UIColor.systemRed.rgb
