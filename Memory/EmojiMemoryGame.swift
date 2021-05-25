@@ -15,7 +15,7 @@ class EmojiMemoryGame: ObservableObject {
     
     
     private static func createMemorizeGame() -> MemorizeGame<String> {
-        let theme = Themes()
+        let theme = Theme(theme: .flags)
         print("json = \(String(data: theme.json!, encoding: .utf8) ?? "nil")")
         let emojis: Array<String> = theme.emojis
         
@@ -28,7 +28,7 @@ class EmojiMemoryGame: ObservableObject {
     
     // MARK: - Access to Model
     var cards: Array<MemorizeGame<String>.Card> { game.cards }
-    var theme: Themes { game.theme }
+    var theme: Theme { game.theme }
     var score: Int { game.score }
     
     // MARK: - User Intents

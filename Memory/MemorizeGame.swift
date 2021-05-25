@@ -11,7 +11,7 @@ struct MemorizeGame<CardContent: Equatable> {
     
     // MARK: - Initializer
     private(set) var cards: Array<Card>
-    private(set) var theme: Themes
+    private(set) var theme: Theme
     private(set) var score = 0
     
     private var indexOfTheOneOnlyFaceUpCard: Int? {
@@ -33,7 +33,7 @@ struct MemorizeGame<CardContent: Equatable> {
 
     
     // Initializes n numbers of pairs of card with game specific content
-    init(numberOfPairsOfCards: Int, theme: Themes, cardContent: (Int)->CardContent) {
+    init(numberOfPairsOfCards: Int, theme: Theme, cardContent: (Int)->CardContent) {
         cards = Array<Card>()
         self.theme = theme
         for index in 0..<numberOfPairsOfCards {
@@ -52,17 +52,19 @@ struct MemorizeGame<CardContent: Equatable> {
                     cards[chosenIndex].isMatched = true
                     cards[indexOfCurrentFaceUpCard].isMatched = true
                     score += 2
+                    let bonusPoints = cards[chosenIndex].bonusRemaining + cards[indexOfCurrentFaceUpCard].bonusRemaining
+                    score += Int(bonusPoints)
 //                    indexOfTheOneOnlyFaceUpCard = nil
                 } else {
                     let cardsInvolved = [cards[indexOfCurrentFaceUpCard], cards[chosenIndex]]
                     let scoreDeduction = cardsInvolved.indices.filter { cardsInvolved[$0].hasSeen }.count
                     score -= scoreDeduction
                     cards[chosenIndex].hasSeen = true
+                    cards[indexOfCurrentFaceUpCard].hasSeen = true
                 }
                 self.cards[chosenIndex].isFaceUp = true
             } else {
                 indexOfTheOneOnlyFaceUpCard = chosenIndex
-                cards[chosenIndex].hasSeen = true
             }
         }
     }

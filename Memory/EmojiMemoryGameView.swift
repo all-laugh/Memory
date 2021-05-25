@@ -10,13 +10,13 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     
     @ObservedObject var emojiMemoryGame: EmojiMemoryGame
-    var theme: Themes { emojiMemoryGame.theme }
+    var theme: Theme { emojiMemoryGame.theme }
     var cardColor: Color { Color(theme.cardColor) }
     var score: Int { emojiMemoryGame.score }
 
     var body: some View {
         VStack {
-            Text(theme.theme?.rawValue.uppercased() ?? "no theme")
+            Text(theme.themeName?.rawValue.uppercased() ?? "no theme")
                 .fontWeight(.bold)
                 .padding(.top, 10)
                 .font(.title)

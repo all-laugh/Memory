@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-struct Themes: Codable {
-    enum themes: String, CaseIterable, Codable {
+struct Theme: Codable {
+    enum Themes: String, CaseIterable, Codable {
         case flags, faces, symbols, popular, animals, foods
     }
     var emojis: Array<String>
-    var theme: themes?
+    var themeName: Themes?
     var numberOfPairsOfCards: Int
     var cardColor: UIColor.RGB
     
-    init() {
-        theme = themes.allCases.randomElement()
+    init(theme: Themes) {
+//        self.theme = Themes.allCases.randomElement()
+        self.themeName = theme
         switch theme {
         case .flags:
             emojis = ["🇨🇳", "🇺🇸", "🇨🇷", "🇦🇶", "🇦🇷", "🇧🇯", "🇧🇷"]
@@ -44,10 +45,10 @@ struct Themes: Codable {
             numberOfPairsOfCards = 5
             cardColor = UIColor.systemOrange.rgb
             
-        case .none:
-            emojis = ["📵"]
-            numberOfPairsOfCards = 1
-            cardColor = UIColor.red.rgb
+//        case .none:
+//            emojis = ["📵"]
+//            numberOfPairsOfCards = 1
+//            cardColor = UIColor.red.rgb
         }
     }
     
