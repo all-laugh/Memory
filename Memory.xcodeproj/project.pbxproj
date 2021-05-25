@@ -61,6 +61,7 @@
 		11B115C925F6D1CC00EADBFE = {
 			isa = PBXGroup;
 			children = (
+				500EAA21265D782E002A69FA /* README.md */,
 				11B115D425F6D1CC00EADBFE /* Memory */,
 				11B115D325F6D1CC00EADBFE /* Products */,
 			);
@@ -83,7 +84,6 @@
 				11B115D925F6D1CC00EADBFE /* EmojiMemoryGameView.swift */,
 				111DD3A5260D4E7E00C3BD0F /* Cardify.swift */,
 				11297924260BE891003CF1F8 /* Theme.swift */,
-				500EAA21265D782E002A69FA /* README.md */,
 				11A1156D25FB129000A93F1A /* GridLayout.swift */,
 				11A1157425FB153700A93F1A /* Grid.swift */,
 				111DD3A8260E23F600C3BD0F /* CountdownPie.swift */,
