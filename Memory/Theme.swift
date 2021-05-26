@@ -7,18 +7,27 @@
 
 import SwiftUI
 
-struct Theme: Codable {
-    enum Themes: String, CaseIterable, Codable {
+struct Theme: Codable, Identifiable {
+    enum defaultThemes: String, CaseIterable, Codable {
         case flags, faces, symbols, popular, animals, foods
     }
+    
+    var id: UUID = UUID()
     var emojis: Array<String>
-    var themeName: Themes?
+    var themeName: String
     var numberOfPairsOfCards: Int
     var cardColor: UIColor.RGB
     
-    init(theme: Themes) {
-//        self.theme = Themes.allCases.randomElement()
-        self.themeName = theme
+    init(emojis: Array<String>, themeName: String, numberOfPairsOfCards: Int, cardColor: UIColor.RGB) {
+        self.emojis = emojis
+        self.themeName = themeName
+        self.numberOfPairsOfCards = numberOfPairsOfCards
+        self.cardColor = cardColor
+    }
+    
+    init(_ theme: defaultThemes) {
+//        theme = defaultThemes.allCases.randomElement()
+        self.themeName = theme.rawValue
         switch theme {
         case .flags:
             emojis = ["🇨🇳", "🇺🇸", "🇨🇷", "🇦🇶", "🇦🇷", "🇧🇯", "🇧🇷"]
@@ -52,13 +61,15 @@ struct Theme: Codable {
         }
     }
     
-    var json: Data? {
-        return try? JSONEncoder().encode(self)
-    }
-    
+//    var json: Data? {
+//        return try? JSONEncoder().encode(self)
+//    }
+//    
 //    init?(json: Data?) {
-//        if json != nil, let initializedTheme = try? JSONDecoder().decode(Themes.self, from: json!) {
-//
+//        if json != nil, let initializedTheme = try? JSONDecoder().decode(Theme.self, from: json!) {
+//            self = initializedTheme
+//        } else {
+//            return nil
 //        }
 //    }
 

@@ -11,24 +11,27 @@ class EmojiMemoryGame: ObservableObject {
     
     // MARK: - Game Model Initialization
     
-    @Published private var game: MemorizeGame<String> = createMemorizeGame()
+    @Published private var game: MemorizeGame<String>
+    @Published var theme: Theme
     
+    init(theme: Theme) {
+        self.theme = theme
+        self.game = EmojiMemoryGame.createMemorizeGame(theme: theme)
+    }
     
-    private static func createMemorizeGame() -> MemorizeGame<String> {
-        let theme = Theme(theme: .flags)
-        print("json = \(String(data: theme.json!, encoding: .utf8) ?? "nil")")
+    private static func createMemorizeGame(theme: Theme) -> MemorizeGame<String> {
+//        print("json = \(String(data: theme.json!, encoding: .utf8) ?? "nil")")
         let emojis: Array<String> = theme.emojis
         
         let numPairs = theme.numberOfPairsOfCards
         
-        return MemorizeGame<String> (numberOfPairsOfCards: numPairs, theme: theme) { pairIndex in
+        return MemorizeGame<String> (numberOfPairsOfCards: numPairs) { pairIndex in
             return emojis[pairIndex % emojis.count]
         }
     }
     
     // MARK: - Access to Model
     var cards: Array<MemorizeGame<String>.Card> { game.cards }
-    var theme: Theme { game.theme }
     var score: Int { game.score }
     
     // MARK: - User Intents
@@ -38,7 +41,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func resetGame() -> Void {
-        self.game = EmojiMemoryGame.createMemorizeGame()
+        self.game = EmojiMemoryGame.createMemorizeGame(theme: self.theme)
     }
     
 }
