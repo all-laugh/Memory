@@ -16,7 +16,7 @@ struct EmojiMemoryGameView: View {
 
     var body: some View {
         VStack {
-            Text(theme.themeName?.rawValue.uppercased() ?? "no theme")
+            Text(theme.themeName.uppercased())
                 .fontWeight(.bold)
                 .padding(.top, 10)
                 .font(.title)
@@ -103,11 +103,11 @@ struct EmojiMemoryGameView: View {
         }
     }
 
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            let game = EmojiMemoryGame()
-            game.choose(game.cards[0])
-            return EmojiMemoryGameView(emojiMemoryGame: game)
-        }
-    }
+//    struct ContentView_Previews: PreviewProvider {
+//        static var previews: some View {
+//            let game = EmojiMemoryGame()
+//            game.choose(game.cards[0])
+//            return EmojiMemoryGameView(emojiMemoryGame: game)
+//        }
+//    }
 }

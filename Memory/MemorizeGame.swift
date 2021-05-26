@@ -11,7 +11,6 @@ struct MemorizeGame<CardContent: Equatable> {
     
     // MARK: - Initializer
     private(set) var cards: Array<Card>
-    private(set) var theme: Theme
     private(set) var score = 0
     
     private var indexOfTheOneOnlyFaceUpCard: Int? {
@@ -33,9 +32,8 @@ struct MemorizeGame<CardContent: Equatable> {
 
     
     // Initializes n numbers of pairs of card with game specific content
-    init(numberOfPairsOfCards: Int, theme: Theme, cardContent: (Int)->CardContent) {
+    init(numberOfPairsOfCards: Int, cardContent: (Int)->CardContent) {
         cards = Array<Card>()
-        self.theme = theme
         for index in 0..<numberOfPairsOfCards {
             let content = cardContent(index)
             cards.append( Card(id: index * 2, content: content))
