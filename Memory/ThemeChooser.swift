@@ -10,6 +10,7 @@ import SwiftUI
 struct ThemeChooser: View {
     @EnvironmentObject var themeStore: ThemeStore
     @State var editMode: EditMode = .inactive
+    @State var showThemeEditor: Bool = false
     
     var body: some View {
         NavigationView {
@@ -18,7 +19,7 @@ struct ThemeChooser: View {
                     NavigationLink(destination: EmojiMemoryGameView(theme: theme)
                                     .navigationBarTitle(themeStore.name(for: theme))
                     ) {
-                        ThemeRowView(theme: theme, isEditing: editMode.isEditing).environmentObject(themeStore)
+                        ThemeRowView(theme: theme, isEditing: editMode.isEditing).environmentObject(self.themeStore)
                     }
                 }
                 .onDelete { indexSet in
@@ -27,20 +28,15 @@ struct ThemeChooser: View {
                     }
                 }
             }
-            .navigationBarTitle(themeStore.name)
+            .navigationBarTitle(self.themeStore.name)
             .navigationBarItems(
                 leading: Button(action: {
-                    themeStore.addTheme()
+                    self.themeStore.addTheme()
                 }, label: {
                     Image(systemName: "plus").imageScale(.large)
                 }),
                 trailing: EditButton()
-            )
-        }
-        .environment(\.editMode, $editMode)
-        
-        Button("isEditing?") {
-            print(editMode)
+            ).environment(\.editMode, $editMode)
         }
     }
 }
