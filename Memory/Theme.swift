@@ -30,10 +30,14 @@ struct Theme: Codable, Identifiable {
         numberOfPairsOfCards = number
     }
     
+    mutating func setThemeColor(to color: UIColor.RGB) {
+        cardColor = color
+    }
+    
     init() {
-        self.emojis = ["🆕"]
+        self.emojis = ["🆕", "🛠", "🧱"]
         self.themeName = "New Theme"
-        self.numberOfPairsOfCards = 0
+        self.numberOfPairsOfCards = 3
         self.cardColor = UIColor.systemBlue.rgb
     }
     

@@ -14,11 +14,12 @@ extension Color {
 }
 
 extension UIColor {
-    public struct RGB: Hashable, Codable {
-         var red: CGFloat
-         var green: CGFloat
-         var blue: CGFloat
-         var alpha: CGFloat
+    public struct RGB: Hashable, Codable, Identifiable {
+        public var id = UUID()
+        var red: CGFloat
+        var green: CGFloat
+        var blue: CGFloat
+        var alpha: CGFloat
     }
 
     convenience init(_ rgb: RGB) {

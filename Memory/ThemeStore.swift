@@ -13,6 +13,20 @@ class ThemeStore: ObservableObject {
     
     @Published var savedThemes: [Theme]
     
+    static let themeColors: [UIColor.RGB] = [
+        UIColor.systemRed.rgb,
+        UIColor.systemBlue.rgb,
+        UIColor.systemPurple.rgb,
+        UIColor.systemTeal.rgb,
+        UIColor.systemGray.rgb,
+        UIColor.systemGreen.rgb,
+        UIColor.systemOrange.rgb,
+        UIColor.systemYellow.rgb,
+        UIColor.systemIndigo.rgb,
+        UIColor.brown.rgb,
+        UIColor.black.rgb
+    ]
+    
     private var autosave: AnyCancellable?
     
     func name(for theme: Theme) -> String {
@@ -47,6 +61,18 @@ class ThemeStore: ObservableObject {
         swapTheme(previous: theme, new: newTheme)
     }
      
+    func setPairsOfCards(for theme: Theme, numberOfPairs: Int) {
+        var newTheme = theme
+        newTheme.setPairsOfCards(to: numberOfPairs)
+        swapTheme(previous: theme, new: newTheme)
+    }
+    
+    func setThemeColor(to color: UIColor.RGB, for theme: Theme) {
+        var newTheme = theme
+        newTheme.setThemeColor(to: color)
+        swapTheme(previous: theme, new: newTheme)
+    }
+    
     func swapTheme(previous: Theme, new: Theme) {
         if let previousIndex = self.savedThemes.firstIndex(matching: previous) {
             savedThemes.remove(at: previousIndex)
@@ -54,11 +80,6 @@ class ThemeStore: ObservableObject {
         }
     }
     
-    func setPairsOfCards(for theme: Theme, pair: Int) {
-        var newTheme = theme
-        newTheme.setPairsOfCards(to: pair)
-        swapTheme(previous: theme, new: newTheme)
-    }
     
     init(named name: String = "Memory Game") {
         self.name = name
@@ -87,6 +108,7 @@ class ThemeStore: ObservableObject {
             self.savedThemes.remove(at: indexToRemove)
         }
     }
+    
 }
 
 extension Array where Element == Theme {

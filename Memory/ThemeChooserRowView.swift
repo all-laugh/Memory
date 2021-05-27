@@ -27,26 +27,28 @@ struct ThemeChooserRowView: View {
         HStack {
             Text(self.theme.emojis.first!)
                 .font(.title2)
-            Text(store.name(for: theme))
-                .font(Font.system(size: 20, weight: .semibold))
-                .foregroundColor(isEditing ? .black : Color(theme.cardColor))
-            Spacer()
-            Image(systemName: "square.and.pencil")
-                .resizable()
-                .frame(width: editSymbolSize, height: editSymbolSize)
-                .opacity(isEditing ? 1 : 0)
-                .onTapGesture {
-                    print("editing? \(isEditing)")
-                    if isEditing {
-                        self.showThemeEditor = true
+            Group {
+                Text(store.name(for: theme))
+                    .font(Font.system(size: 20, weight: .semibold))
+                Spacer()
+                Image(systemName: "square.and.pencil")
+                    .resizable()
+                    .frame(width: editSymbolSize, height: editSymbolSize)
+                    .opacity(isEditing ? 1 : 0)
+                    .onTapGesture {
+                        print("editing? \(isEditing)")
+                        if isEditing {
+                            self.showThemeEditor = true
+                        }
                     }
-                }
-                .disabled(!isEditing)
+                    .disabled(!isEditing)
+            }
+            .foregroundColor(Color(theme.cardColor))
             Text("\(theme.numberOfPairsOfCards) pairs")
                         .font(.caption)
         }
         .popover(isPresented: $showThemeEditor) {
-            ThemeEditor(isShowing: $showThemeEditor, themeToEdit: theme)
+            ThemeEditor(themeToEdit: theme)
                 .environmentObject(self.store)
         }
     }

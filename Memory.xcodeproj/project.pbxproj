@@ -21,9 +21,10 @@
 		11B115E225F6D1CD00EADBFE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B115E025F6D1CD00EADBFE /* LaunchScreen.storyboard */; };
 		11B115EB25F6D27000EADBFE /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B115EA25F6D27000EADBFE /* EmojiMemoryGame.swift */; };
 		500194F0265EF84500D615BE /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500194EF265EF84500D615BE /* Grid.swift */; };
-		500194F2265FF51600D615BE /* ThemeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500194F1265FF51600D615BE /* ThemeEditor.swift */; };
+		500194F2265FF51600D615BE /* ThemeEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500194F1265FF51600D615BE /* ThemeEditorView.swift */; };
+		500194F42660338C00D615BE /* ColorSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500194F32660338C00D615BE /* ColorSelectorView.swift */; };
 		500EAA23265D9F44002A69FA /* ThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500EAA22265D9F44002A69FA /* ThemeStore.swift */; };
-		500EAA25265DABCE002A69FA /* ThemeChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500EAA24265DABCE002A69FA /* ThemeChooser.swift */; };
+		500EAA25265DABCE002A69FA /* ThemeChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500EAA24265DABCE002A69FA /* ThemeChooserView.swift */; };
 		500EAA29265DB096002A69FA /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500EAA28265DB096002A69FA /* EditableText.swift */; };
 		50150C652653FE0700F94050 /* MemorizeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B115ED25F6D27900EADBFE /* MemorizeGame.swift */; };
 		50150C672654115200F94050 /* UIColor+RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50150C662654115200F94050 /* UIColor+RGBA.swift */; };
@@ -48,10 +49,11 @@
 		11B115EA25F6D27000EADBFE /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		11B115ED25F6D27900EADBFE /* MemorizeGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorizeGame.swift; sourceTree = "<group>"; };
 		500194EF265EF84500D615BE /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
-		500194F1265FF51600D615BE /* ThemeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditor.swift; sourceTree = "<group>"; };
+		500194F1265FF51600D615BE /* ThemeEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditorView.swift; sourceTree = "<group>"; };
+		500194F32660338C00D615BE /* ColorSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorView.swift; sourceTree = "<group>"; };
 		500EAA21265D782E002A69FA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		500EAA22265D9F44002A69FA /* ThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeStore.swift; sourceTree = "<group>"; };
-		500EAA24265DABCE002A69FA /* ThemeChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChooser.swift; sourceTree = "<group>"; };
+		500EAA24265DABCE002A69FA /* ThemeChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChooserView.swift; sourceTree = "<group>"; };
 		500EAA28265DB096002A69FA /* EditableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		50150C662654115200F94050 /* UIColor+RGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGBA.swift"; sourceTree = "<group>"; };
 		50AF3ECA265E9F6C00C87ACA /* ThemeChooserRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChooserRowView.swift; sourceTree = "<group>"; };
@@ -95,9 +97,10 @@
 				111DD3A5260D4E7E00C3BD0F /* Cardify.swift */,
 				11297924260BE891003CF1F8 /* Theme.swift */,
 				500EAA22265D9F44002A69FA /* ThemeStore.swift */,
-				500EAA24265DABCE002A69FA /* ThemeChooser.swift */,
+				500EAA24265DABCE002A69FA /* ThemeChooserView.swift */,
 				50AF3ECA265E9F6C00C87ACA /* ThemeChooserRowView.swift */,
-				500194F1265FF51600D615BE /* ThemeEditor.swift */,
+				500194F1265FF51600D615BE /* ThemeEditorView.swift */,
+				500194F32660338C00D615BE /* ColorSelectorView.swift */,
 				500194EF265EF84500D615BE /* Grid.swift */,
 				11A1156D25FB129000A93F1A /* GridLayout.swift */,
 				111DD3A8260E23F600C3BD0F /* CountdownPie.swift */,
@@ -196,13 +199,14 @@
 				50150C652653FE0700F94050 /* MemorizeGame.swift in Sources */,
 				11B115D825F6D1CC00EADBFE /* SceneDelegate.swift in Sources */,
 				11B115DA25F6D1CC00EADBFE /* EmojiMemoryGameView.swift in Sources */,
-				500EAA25265DABCE002A69FA /* ThemeChooser.swift in Sources */,
+				500EAA25265DABCE002A69FA /* ThemeChooserView.swift in Sources */,
 				11297925260BE891003CF1F8 /* Theme.swift in Sources */,
 				1129791D260A846F003CF1F8 /* Array+Only.swift in Sources */,
 				50150C672654115200F94050 /* UIColor+RGBA.swift in Sources */,
+				500194F42660338C00D615BE /* ColorSelectorView.swift in Sources */,
 				11A1156E25FB129000A93F1A /* GridLayout.swift in Sources */,
 				111DD3A6260D4E7E00C3BD0F /* Cardify.swift in Sources */,
-				500194F2265FF51600D615BE /* ThemeEditor.swift in Sources */,
+				500194F2265FF51600D615BE /* ThemeEditorView.swift in Sources */,
 				500194F0265EF84500D615BE /* Grid.swift in Sources */,
 				11297919260A6C57003CF1F8 /* Array+Identifiable.swift in Sources */,
 				111DD3A9260E23F600C3BD0F /* CountdownPie.swift in Sources */,

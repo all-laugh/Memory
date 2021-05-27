@@ -10,34 +10,23 @@ import SwiftUI
 struct ThemeEditor: View {
     @EnvironmentObject var store: ThemeStore
     
-    @Binding var isShowing: Bool
     @State private var themeName: String = ""
     @State private var emojisToAdd: String = ""
     @State private var numberOfPairsOfCards: Int = 3
     
-    var themeToEdit: Theme
+    private var themeToEdit: Theme
+    private var maxCardPairCount: Int {
+        self.themeToEdit.emojis.count
+    }
     
-    init (isShowing: Binding<Bool>, themeToEdit: Theme) {
-        self._isShowing = isShowing
+    init (themeToEdit: Theme) {
         self.themeToEdit = themeToEdit
-        _numberOfPairsOfCards = State(wrappedValue: self.themeToEdit.numberOfPairsOfCards)
+        _numberOfPairsOfCards = State(wrappedValue: self.themeToEdit.emojis.count)
     }
     
     var body: some View {
         VStack {
-            ZStack {
-                Text(store.name(for: themeToEdit)).font(.headline).padding()
-                HStack {
-                    Button(action: {
-                        self.isShowing = false
-                    }, label: { Text("Cancel") }).padding()
-                    Spacer()
-                    Button(action: {
-                        
-                        self.isShowing = false
-                    }, label: { Text("Done") }).padding()
-                }
-            }
+            Text(store.name(for: themeToEdit)).font(.headline).padding()
             Divider()
             Form {
                 Section(header: Text("Theme Name")) {
@@ -66,25 +55,30 @@ struct ThemeEditor: View {
                         }
                     }
                 }
-                Section(header: Text("Current Emojis"), footer: Text("Tap to exclude.")) {
+                Section(header: Text("Current Emojis"), footer: Text("Tap to exclude. 2 emojis minimum.")) {
                     Grid(themeToEdit.emojis.map { String($0) }, id: \.self) { emoji in
                         Text(emoji).font(Font.system(size: self.fontSize))
                             .onTapGesture {
-                                self.store.removeEmoji(from: self.themeToEdit, emoji: emoji)
+                                if self.themeToEdit.emojis.count > 2 {
+                                    self.store.removeEmoji(from: self.themeToEdit, emoji: emoji)
+                                    self.numberOfPairsOfCards = themeToEdit.emojis.count
+                                }
                             }
                     }
-                    .frame(height: self.height)
+                    .frame(height: self.emojiGridFrameHeight)
                 }
-                
-                Section(header: Text("Card Number")) {
-                    Stepper(value: $numberOfPairsOfCards, in: 2...15) { isEditing in
+                Section(header: Text("Card Count"), footer: Text("\(maxCardPairCount) pairs maximum.")) {
+                    Stepper(value: $numberOfPairsOfCards, in: 2...maxCardPairCount) { isEditing in
                         if !isEditing {
-                            self.store.setPairsOfCards(for: themeToEdit, pair: numberOfPairsOfCards)
+                            self.store.setPairsOfCards(for: themeToEdit, numberOfPairs: numberOfPairsOfCards)
                         }
                     } label: {
-                        Text("\(numberOfPairsOfCards) pairs of cards.")
+                        Text("\(numberOfPairsOfCards) pairs of cards")
 
                     }
+                }
+                Section(header: Text("Card Color")) {
+                    ColorSelector(store: _store, selectedColor: themeToEdit.cardColor, themeToEdit: themeToEdit)
                 }
             }
         }
@@ -92,9 +86,10 @@ struct ThemeEditor: View {
     }
     
     //MARK: - Drawing Constants
-    var height: CGFloat {
+    var emojiGridFrameHeight: CGFloat {
         CGFloat((themeToEdit.emojis.count - 1) / 6) * 70 + 70
     }
+    
     let fontSize: CGFloat = 40
     
 }

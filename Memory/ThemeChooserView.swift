@@ -39,18 +39,10 @@ struct ThemeChooser: View {
                 trailing: EditButton()
             )
             .popover(isPresented: $showThemeEditor, content: {
-                ThemeEditor(isShowing: $showThemeEditor, themeToEdit: self.themeStore.savedThemes.last!)
+                ThemeEditor(themeToEdit: self.themeStore.savedThemes.last!)
                     .environmentObject(self.themeStore)
             })
-            .environment(\.editMode, $editMode)
-            
+            .environment(\.editMode, $editMode)   
         }
-        Text("\(self.themeStore.savedThemes.count) themes total")
     }
 }
-
-//struct ThemeChooser_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ThemeChooser()
-//    }
-//}
