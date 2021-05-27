@@ -18,6 +18,14 @@ struct Theme: Codable, Identifiable {
     var numberOfPairsOfCards: Int
     var cardColor: UIColor.RGB
     
+    mutating func rename(to newName: String) {
+        themeName = newName
+    }
+    
+    mutating func updateEmojis(newEmojis: [String]) {
+        emojis = newEmojis
+    }
+    
     init(emojis: Array<String>, themeName: String, numberOfPairsOfCards: Int, cardColor: UIColor.RGB) {
         self.emojis = emojis
         self.themeName = themeName
@@ -26,7 +34,6 @@ struct Theme: Codable, Identifiable {
     }
     
     init(_ theme: defaultThemes) {
-//        theme = defaultThemes.allCases.randomElement()
         self.themeName = theme.rawValue
         switch theme {
         case .flags:
@@ -54,23 +61,6 @@ struct Theme: Codable, Identifiable {
             numberOfPairsOfCards = 5
             cardColor = UIColor.systemOrange.rgb
             
-//        case .none:
-//            emojis = ["📵"]
-//            numberOfPairsOfCards = 1
-//            cardColor = UIColor.red.rgb
         }
     }
-    
-//    var json: Data? {
-//        return try? JSONEncoder().encode(self)
-//    }
-//    
-//    init?(json: Data?) {
-//        if json != nil, let initializedTheme = try? JSONDecoder().decode(Theme.self, from: json!) {
-//            self = initializedTheme
-//        } else {
-//            return nil
-//        }
-//    }
-
 }

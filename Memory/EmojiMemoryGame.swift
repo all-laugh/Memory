@@ -20,13 +20,11 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     private static func createMemorizeGame(theme: Theme) -> MemorizeGame<String> {
-//        print("json = \(String(data: theme.json!, encoding: .utf8) ?? "nil")")
         let emojis: Array<String> = theme.emojis
-        
         let numPairs = theme.numberOfPairsOfCards
         
         return MemorizeGame<String> (numberOfPairsOfCards: numPairs) { pairIndex in
-            return emojis[pairIndex % emojis.count]
+            return emojis[pairIndex]
         }
     }
     

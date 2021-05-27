@@ -13,15 +13,14 @@ struct EmojiMemoryGameView: View {
     var theme: Theme { emojiMemoryGame.theme }
     var cardColor: Color { Color(theme.cardColor) }
     var score: Int { emojiMemoryGame.score }
+    
+    init(theme: Theme) {
+        self.emojiMemoryGame = EmojiMemoryGame(theme: theme)
+    }
 
     var body: some View {
         VStack {
-            Text(theme.themeName.uppercased())
-                .fontWeight(.bold)
-                .padding(.top, 10)
-                .font(.title)
-            Text("Score: \(score)").font(.caption)
-            
+            Text("Score: \(score)").font(.headline)
             Grid(emojiMemoryGame.cards) { card in
                 CardView(card: card).onTapGesture {
                     withAnimation(.linear) {
@@ -38,7 +37,7 @@ struct EmojiMemoryGameView: View {
                 }
             }
                 .padding(.bottom, 15)
-                .font(.title)
+                .font(.system(size: 30, weight: .bold))
         }
         .foregroundColor(cardColor)
 

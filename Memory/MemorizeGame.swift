@@ -30,7 +30,6 @@ struct MemorizeGame<CardContent: Equatable> {
         cards.indices.filter { cards[$0].hasSeen }
     }
 
-    
     // Initializes n numbers of pairs of card with game specific content
     init(numberOfPairsOfCards: Int, cardContent: (Int)->CardContent) {
         cards = Array<Card>()
@@ -52,7 +51,6 @@ struct MemorizeGame<CardContent: Equatable> {
                     score += 2
                     let bonusPoints = cards[chosenIndex].bonusRemaining + cards[indexOfCurrentFaceUpCard].bonusRemaining
                     score += Int(bonusPoints)
-//                    indexOfTheOneOnlyFaceUpCard = nil
                 } else {
                     let cardsInvolved = [cards[indexOfCurrentFaceUpCard], cards[chosenIndex]]
                     let scoreDeduction = cardsInvolved.indices.filter { cardsInvolved[$0].hasSeen }.count
