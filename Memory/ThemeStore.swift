@@ -54,6 +54,12 @@ class ThemeStore: ObservableObject {
         }
     }
     
+    func setPairsOfCards(for theme: Theme, pair: Int) {
+        var newTheme = theme
+        newTheme.setPairsOfCards(to: pair)
+        swapTheme(previous: theme, new: newTheme)
+    }
+    
     init(named name: String = "Memory Game") {
         self.name = name
         let defaultsKey = "MemoryGameThemes"
@@ -71,8 +77,8 @@ class ThemeStore: ObservableObject {
         }
     }
     
-    func addTheme() {
-        let theme = Theme(emojis: ["🛠", "🧱", "🔧"], themeName: "New Theme", numberOfPairsOfCards: 3, cardColor: UIColor.systemGray.rgb)
+    func addTheme(theme: Theme) {
+//        let theme = Theme(emojis: ["🛠", "🧱", "🔧"], themeName: "New Theme", numberOfPairsOfCards: 3, cardColor: UIColor.systemGray.rgb)
         self.savedThemes.append(theme)
     }
     

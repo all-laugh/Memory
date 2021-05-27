@@ -26,6 +26,17 @@ struct Theme: Codable, Identifiable {
         emojis = newEmojis
     }
     
+    mutating func setPairsOfCards(to number: Int) {
+        numberOfPairsOfCards = number
+    }
+    
+    init() {
+        self.emojis = ["🆕"]
+        self.themeName = "New Theme"
+        self.numberOfPairsOfCards = 0
+        self.cardColor = UIColor.systemBlue.rgb
+    }
+    
     init(emojis: Array<String>, themeName: String, numberOfPairsOfCards: Int, cardColor: UIColor.RGB) {
         self.emojis = emojis
         self.themeName = themeName

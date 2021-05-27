@@ -19,7 +19,7 @@ struct ThemeChooser: View {
                     NavigationLink(destination: EmojiMemoryGameView(theme: theme)
                                     .navigationBarTitle(themeStore.name(for: theme))
                     ) {
-                        ThemeRowView(theme: theme, isEditing: editMode.isEditing).environmentObject(self.themeStore)
+                        ThemeChooserRowView(theme: theme, isEditing: editMode.isEditing).environmentObject(self.themeStore)
                     }
                 }
                 .onDelete { indexSet in
@@ -31,13 +31,21 @@ struct ThemeChooser: View {
             .navigationBarTitle(self.themeStore.name)
             .navigationBarItems(
                 leading: Button(action: {
-                    self.themeStore.addTheme()
+                    self.themeStore.addTheme(theme: Theme())
+                    self.showThemeEditor = true
                 }, label: {
                     Image(systemName: "plus").imageScale(.large)
                 }),
                 trailing: EditButton()
-            ).environment(\.editMode, $editMode)
+            )
+            .popover(isPresented: $showThemeEditor, content: {
+                ThemeEditor(isShowing: $showThemeEditor, themeToEdit: self.themeStore.savedThemes.last!)
+                    .environmentObject(self.themeStore)
+            })
+            .environment(\.editMode, $editMode)
+            
         }
+        Text("\(self.themeStore.savedThemes.count) themes total")
     }
 }
 
